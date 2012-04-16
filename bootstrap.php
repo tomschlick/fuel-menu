@@ -8,7 +8,7 @@
  * @package    Menu
  * @version    1.0
  * @author     Tom Schlick (tom@tomschlick.com)
- * @link       http://github.com/tomschlick/php-menu
+ * @link       http://github.com/tomschlick/fuel-menu
  */
 
 Autoloader::add_classes(array(
