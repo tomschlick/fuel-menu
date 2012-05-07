@@ -3,7 +3,7 @@
 class Menu_Item
 {
 	protected $title 		= '';
-	protected $link 		= '#';
+	protected $link 		= false;
 	protected $a_attr 		= array();
 	protected $li_attr 		= array();
 	protected $ul_attr 		= array();	// Only used for sub-items
@@ -136,11 +136,19 @@ class Menu_Item
 			}
 		}
 
-		$content = Html::anchor(
+		if($this->link !== false)
+		{
+			$content = Html::anchor(
 						Uri::create($this->link),
 						$text,
 						$this->a_attr
 					);
+		}
+		else
+		{
+			$content = $text;
+		}
+
 
 		if(!$this->is_list)
 		{
