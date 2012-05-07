@@ -206,7 +206,7 @@ class Menu_Item
 
 	public function set_permission($data = false)
 	{
-		$this->permission = (string) $data;
+		$this->permission = $data;
 		return $this;
 	}
 
