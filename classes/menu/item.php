@@ -97,7 +97,7 @@ class Menu_Item
 		{
 			$current = Arr::get($this->icon_attr, 'class');
 			Arr::set($this->icon_attr, 'class',
-				(!empty($current)) ? $current . ' icon-' . $this->icon : ' icon-' . $this->icon
+				(!empty($current)) ? $current . ' icon-' . $this->icon : 'icon-' . $this->icon
 				);
 			$icon = html_tag('i', $this->icon_attr, '').'&nbsp;&nbsp;';
 		}
