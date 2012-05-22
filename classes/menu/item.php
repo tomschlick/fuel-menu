@@ -114,10 +114,9 @@ class Menu_Item
 			$subs = '';
 			foreach($this->sub_items as $item)
 			{
-				$subs .= "\n".(string) $item;
+				$subs .= (string) $item;
 			}
-			$subs .= "\n";
-			$subs = "\n".html_tag(
+			$subs = html_tag(
 				'ul',
 				$this->ul_attr,
 				$subs

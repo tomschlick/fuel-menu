@@ -72,9 +72,8 @@ class Menu
 			$subs = '';
 			foreach($this->items as $item)
 			{
-				$subs .= "\n".(string) $item;
+				$subs .= (string) $item;
 			}
-			$subs .= "\n";
 
 			if(!$this->is_list)
 			{
