@@ -5,6 +5,7 @@ class Menu
 	protected $items = array();
 	protected $ul_attr = array();
 	protected $is_list = true;
+	protected $divider = '';
 
 	public static function forge()
 	{
@@ -30,7 +31,7 @@ class Menu
 				$this->items[$key] = Menu_Item::forge($row)->set_is_list($this->is_list);
 			}
 		}
-
+    
 		return $this;
 	}
 
@@ -56,6 +57,12 @@ class Menu
 
 		return $this;
 	}
+	
+	public function set_divider($data = '')
+	{
+	  $this->divider = (string) $data;
+	  return $this;
+	}
 
 	public function set_is_list($data = false)
 	{
@@ -70,10 +77,14 @@ class Menu
 		if(!empty($this->items))
 		{
 			$subs = '';
+			$all_items = array();
+			
 			foreach($this->items as $item)
 			{
-				$subs .= (string) $item;
+				$all_items[] = (string) $item;
 			}
+			
+			$subs = implode($this->divider, $all_items);
 
 			if(!$this->is_list)
 			{
