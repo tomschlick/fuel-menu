@@ -5,10 +5,14 @@ class Menu_Item
 	protected $title 		= '';
 	protected $link 		= false;
 	protected $a_attr 		= array();
+	protected $a_pre 		= '';
+	protected $a_post 		= '';
 	protected $li_attr 		= array();
 	protected $ul_attr 		= array();	// Only used for sub-items
 	protected $icon 		= null;
 	protected $icon_attr 	= array();
+	protected $icon_post	= '&nbsp;&nbsp;';
+	protected $icon_pre		= '';
 	protected $pre_text 	= null;
 	protected $post_text 	= null;
 	protected $sub_items 	= array();
@@ -42,6 +46,14 @@ class Menu_Item
 						$this->set_icon($row);
 					break;
 
+					case 'icon_pre':
+						$this->set_icon_pre($row);
+					break;
+
+					case 'icon_post':
+						$this->set_icon_post($row);
+					break;
+
 					case 'icon_attr':
 						$this->add_icon_attr($row);
 					break;
@@ -56,6 +68,14 @@ class Menu_Item
 
 					case 'a_attr':
 						$this->add_a_attr($row);
+					break;
+
+					case 'a_pre':
+						$this->set_a_pre($row);
+					break;
+
+					case 'a_post':
+						$this->set_a_post($row);
 					break;
 
 					case 'li_attr':
@@ -99,12 +119,12 @@ class Menu_Item
 			Arr::set($this->icon_attr, 'class',
 				(!empty($current)) ? $current . ' icon-' . $this->icon : 'icon-' . $this->icon
 				);
-			$icon = html_tag('i', $this->icon_attr, '').'&nbsp;&nbsp;';
+			$icon = $this->icon_pre.html_tag('i', $this->icon_attr, '').$this->icon_post;
 		}
 
 		$text = (empty($this->icon)) ? '' : $icon;
 		$text .= (empty($this->pre_text)) ? '' : $this->pre_text;
-		$text .= (empty($this->title)) ? $this->link : $this->title;
+		$text .= (empty($this->title) and $this->title !== '') ? $this->link : $this->title;
 		$text .= (empty($this->post_text)) ? '' : $this->post_text;
 
 		$subs = '';
@@ -148,6 +168,7 @@ class Menu_Item
 			$content = $text;
 		}
 
+		$content = $this->a_pre.$content.$subs.$this->a_post;
 
 		if(!$this->is_list)
 		{
@@ -157,7 +178,7 @@ class Menu_Item
 		return html_tag(
 					'li',
 					$this->li_attr,
-					$content.$subs
+					$content
 				);
 	}
 
@@ -176,6 +197,18 @@ class Menu_Item
 	public function set_icon($data = null)
 	{
 		$this->icon = (string) $data;
+		return $this;
+	}
+
+	public function set_icon_pre($data = null)
+	{
+		$this->icon_pre = (string) $data;
+		return $this;
+	}
+
+	public function set_icon_post($data = null)
+	{
+		$this->icon_post = (string) $data;
 		return $this;
 	}
 
@@ -229,6 +262,18 @@ class Menu_Item
 	public function add_a_attr($key = null, $val = null)
 	{
 		Arr::set($this->a_attr, $key, $val);
+		return $this;
+	}
+
+	public function set_a_pre($data = null)
+	{
+		$this->a_pre = (string) $data;
+		return $this;
+	}
+
+	public function set_a_post($data = null)
+	{
+		$this->a_post = (string) $data;
 		return $this;
 	}
 
