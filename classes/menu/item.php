@@ -244,7 +244,7 @@ class Menu_Item
 
 	public function check_permission()
 	{
-		return Auth::has_permission($this->permission);
+		return Auth::has_access($this->permission);
 	}
 
 	public function add_li_attr($key = null, $val = null)
