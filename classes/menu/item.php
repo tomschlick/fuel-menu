@@ -108,7 +108,7 @@ class Menu_Item
 
 	public function __toString()
 	{
-		if(!empty($this->permission) and !$this->check_permission())
+		if(!is_null($this->permission) and !$this->check_permission())
 		{
 			return '';
 		}
